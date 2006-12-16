@@ -1,0 +1,8 @@
+CHANGES
+lib/GPS/PRN.pm
+LICENSE
+Makefile.PL
+MANIFEST
+README
+META.yml
+t/base.t
