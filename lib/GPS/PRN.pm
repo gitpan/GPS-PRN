@@ -32,7 +32,7 @@ Function naming convention is "format of the return" underscore "format of the p
 
 use strict;
 use vars qw($VERSION);
-$VERSION = sprintf("%d.%02d", q{Revision: 0.01} =~ /(\d+)\.(\d+)/);
+$VERSION = sprintf("%d.%02d", q{Revision: 0.02} =~ /(\d+)\.(\d+)/);
 
 =head1 CONSTRUCTOR
 
@@ -64,7 +64,7 @@ sub initialize {
 
 =head2 prn_oid 
 
-PRN given object ID.
+PRN given Object ID.
 
   my $prn=prn_oid(22231);
 
@@ -72,9 +72,9 @@ PRN given object ID.
 
 sub prn_oid {
   my $self=shift();
-  my $param=shift();
-  my %data=map {$_->[0], int($_->[1])} $self->data;
-  return $data{int($param)};
+  my $param=int(shift());
+  my $data=$self->data;
+  return $data->{$param};
 }
 
 =head2 oid_prn
@@ -87,52 +87,91 @@ Object ID given PRN.
 
 sub oid_prn {
   my $self=shift();
-  my $param=shift();
-  my %data=map {int($_->[1]), $_->[0]} $self->data;
-  return $data{int($param)};
+  my $param=int(shift());
+  my $data=$self->data;
+  $data={map {int($data->{$_}), $_} keys %$data};
+  return $data->{$param};
 }
 
 =head2 data
 
-OID to PRN list
+OID to PRN hash
 
 =cut
 
 sub data {
-  return (
-          [ 22231 => q{01} ],
-          [ 28474 => q{02} ],
-          [ 23833 => q{03} ],
-          [ 22877 => q{04} ],
-          [ 22779 => q{05} ],
-          [ 23027 => q{06} ],
-          [ 22657 => q{07} ],
-          [ 25030 => q{08} ],
-          [ 22700 => q{09} ],
-          [ 23953 => q{10} ],
-          [ 25933 => q{11} ],
-          [ 29601 => q{12} ],
-          [ 24876 => q{13} ],
-          [ 26605 => q{14} ],
-          [ 20830 => q{15} ],
-          [ 27663 => q{16} ],
-          [ 28874 => q{17} ],
-          [ 26690 => q{18} ],
-          [ 28190 => q{19} ],
-          [ 26360 => q{20} ],
-          [ 27704 => q{21} ],
-          [ 28129 => q{22} ],
-          [ 28361 => q{23} ],
-          [ 21552 => q{24} ],
-          [ 21890 => q{25} ],
-          [ 22014 => q{26} ],
-          [ 22108 => q{27} ],
-          [ 26407 => q{28} ],
-          [ 22275 => q{29} ],
-          [ 24320 => q{30} ],
-          [ 29486 => q{31} ],
-          [ 24819 => q{135} ] #or is this 122?
-         );
+  my $self=shift();
+  unless (defined($self->{'data'})) {
+    $self->{'data'}={
+                     22231 => q{01},
+                     28474 => q{02},
+                     23833 => q{03},
+                     22877 => q{04},
+                     22779 => q{05},
+                     23027 => q{06},
+                     22657 => q{07},
+                     25030 => q{08},
+                     22700 => q{09},
+                     23953 => q{10},
+                     25933 => q{11},
+                     29601 => q{12},
+                     24876 => q{13},
+                     26605 => q{14},
+                     20830 => q{15},
+                     27663 => q{16},
+                     28874 => q{17},
+                     26690 => q{18},
+                     28190 => q{19},
+                     26360 => q{20},
+                     27704 => q{21},
+                     28129 => q{22},
+                     28361 => q{23},
+                     21552 => q{24},
+                     21890 => q{25},
+                     22014 => q{26},
+                     22108 => q{27},
+                     26407 => q{28},
+                     22275 => q{29},
+                     24320 => q{30},
+                     29486 => q{31},
+                     24819 => q{135} #or is this 122?
+                    };
+  }
+  return $self->{'data'};
+}
+
+=head2 overload
+
+Adds or overloads new OID/PRN pairs.
+
+  $obj->overload($oid=>$prn);
+
+=cut
+
+sub overload {
+  my $self=shift();
+  my $oid=shift();
+  my $prn=shift();
+  my $data=$self->data;
+  my $return=q{added};
+  if (exists($data->{$oid})) {
+    $return='overloaded';
+  }
+  $data->{$oid}=$prn;
+  return defined($data->{$oid}) ? $return : undef();
+}
+
+=head2 reset
+
+Resets OID/PRN pairs to package defaults.
+
+  $obj->reset;
+
+=cut
+
+sub reset {
+  my $self=shift();
+  undef($self->{'data'});
 }
 
 1;

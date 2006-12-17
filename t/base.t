@@ -39,22 +39,34 @@ BEGIN {
     }
 }
 
-BEGIN { plan tests => 11 }
+BEGIN { plan tests => 19 }
 
 # just check that all modules can be compiled
 ok(eval {require GPS::PRN; 1}, 1, $@);
 
 use GPS::PRN;
-my $obj = GPS::PRN->new("WGS84");
+my $obj = GPS::PRN->new();
 ok(ref $obj, "GPS::PRN");
 
-ok($obj->prn_oid(22231), 1);
-ok($obj->prn_oid("22231"), 1);
+ok($obj->prn_oid(22231), "01");
+ok($obj->prn_oid("22231"), "01");
 ok($obj->oid_prn(1), 22231);
 ok($obj->oid_prn("1"), 22231);
 ok($obj->oid_prn("01"), 22231);
 ok($obj->oid_prn(1), "22231");
-ok($obj->prn_oid(22231), "1");
+ok($obj->prn_oid(22231), "01");
 
 ok($obj->prn_oid(29486), 31);
 ok($obj->oid_prn(31), 29486);
+
+ok($obj->overload(12345, 123), "added");
+ok($obj->prn_oid(12345), 123);
+ok($obj->oid_prn(123), 12345);
+
+ok($obj->overload(22231, 222), "overloaded");
+ok($obj->prn_oid(22231), 222);
+ok($obj->oid_prn(222), 22231);
+$obj->reset;
+ok($obj->prn_oid(22231), "01");
+
+ok($obj->overload(22222, undef()), undef());
