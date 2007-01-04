@@ -1,8 +1,9 @@
+bin/example.pl
 CHANGES
 lib/GPS/PRN.pm
 LICENSE
 Makefile.PL
 MANIFEST
-README
 META.yml
+README
 t/base.t

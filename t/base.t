@@ -39,7 +39,7 @@ BEGIN {
     }
 }
 
-BEGIN { plan tests => 19 }
+BEGIN { plan tests => 21 }
 
 # just check that all modules can be compiled
 ok(eval {require GPS::PRN; 1}, 1, $@);
@@ -69,4 +69,14 @@ ok($obj->oid_prn(222), 22231);
 $obj->reset;
 ok($obj->prn_oid(22231), "01");
 
-ok($obj->overload(22222, undef()), undef());
+#ok($obj->overload(22222=>undef()), undef());
+
+my $list=$obj->listprn;
+ok(ref($list), "ARRAY");
+
+$list=$obj->listoid;
+ok(ref($list), "ARRAY");
+
+my @listprn=$obj->listprn;
+my @listoid=$obj->listoid;
+ok(scalar(@listprn), scalar(@listoid));

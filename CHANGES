@@ -1,3 +1,5 @@
+2006-01-03 v0.03
+  * Added listprn and listoid methods
 2006-12-17 v0.02
   * Added overload and reset methods
 2006-12-16 v0.01
