@@ -32,7 +32,7 @@ Function naming convention is "format of the return" underscore "format of the p
 
 use strict;
 use vars qw($VERSION);
-$VERSION = sprintf("%d.%02d", q{Revision: 0.03} =~ /(\d+)\.(\d+)/);
+$VERSION = sprintf("%d.%02d", q{Revision: 0.04} =~ /(\d+)\.(\d+)/);
 
 =head1 CONSTRUCTOR
 
@@ -168,7 +168,18 @@ sub data {
               22275 => q{29},
               24320 => q{30},
               29486 => q{31},
-              24819 => q{135} #or is this 122?
+              24307 => q{120}, #EGNOS Inmarsat 3F2 AOR-E  15.5°W Garmin 33
+              28899 => q{121}, #      Inmarsat 4F2 AOR-E  53.0°W Garmin 34
+              24819 => q{122}, #WAAS  Inmarsat 3F4 AOR-W 142.0°W Garmin 35
+              26863 => q{124}, #EGNOS ARTEMIS             21.5°E Garmin 37
+             #23839 => q{126}, #      Inmarsat 3F1 IOR-W  64.0°E Garmin 39
+              25153 => q{126}, #EGNOS Inmarsat 3F5 IOR-W  25.0°E Garmin 39
+              28622 => q{129}, #MSAS  MTSAT-1            140.0°E Garmin 42
+             #00000 => q{131}, #ESTB  Inmarsat-III IOR-E  65.5°E Garmin 44
+              24674 => q{134}, #WAAS  Inmarsat 3F3 POR   178.0°E Garmin 47
+              28884 => q{135}, #WAAS  Galaxy 15 (PanAm)  133.0°W Garmin 48
+              28937 => q{137}, #MSAS  MTSAT-2                    Garmin 50
+              28868 => q{138}, #WAAS  Anik F1R (Telsat)  107.3°W Garmin 51
              );
     $self->{'data'}=\%data;
   }
