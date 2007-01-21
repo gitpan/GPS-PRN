@@ -13,16 +13,17 @@ GPS::PRN - Package for PRN - Object ID conversions.
 
 =head1 DESCRIPTION
 
+This module maps GPS PRN number to Satellite OID and vice versa.
+
 =head2 Object Identification Number (OID)
 
 The catalog number assigned to the object by the US Air Force. The numbers are assigned sequentially as objects are cataloged. This is the most common way to search for TLE data on this site.
 
 Object numbers less then 10000 are always aligned to the right, and padded with zeros or spaces to the left.
 
-=head2 Pseudo Randum Numbers (PRNs)
+=head2 Pseudo Random Numbers (PRNs)
 
-GPS satellites are identified by the receiver by means of PRN-numbers. Real GPS satellites are numbered from 1 – 32. WAAS/EGNOS satellites and other pseudolites higher numbers are assigned. These PRN-numbers of the satellites appear on the satellite view screens of many GPS receivers. For simplification of the satellite network 32 different PRN-numbers are available.
-
+GPS satellites are identified by the receiver by means of PRN-numbers. Real GPS satellites are numbered from 1 - 32. WAAS/EGNOS satellites and other pseudolites are assigned higher numbers.  The PRN-numbers of the satellites appear on the satellite view screens of many GPS receivers.
 
 =head1 CONVENTIONS
 
@@ -32,7 +33,7 @@ Function naming convention is "format of the return" underscore "format of the p
 
 use strict;
 use vars qw($VERSION);
-$VERSION = sprintf("%d.%02d", q{Revision: 0.04} =~ /(\d+)\.(\d+)/);
+$VERSION = sprintf("%d.%02d", q{Revision: 0.05} =~ /(\d+)\.(\d+)/);
 
 =head1 CONSTRUCTOR
 
@@ -111,7 +112,7 @@ sub listprn {
 
 =head2 listoid
 
-List all known PRNs.
+List all known OIDs.
 
   my @oid=$obj->listoid;
   my $oid=$obj->listoid;
@@ -209,7 +210,7 @@ sub overload {
 
 =head2 reset
 
-Resets OID/PRN pairs to package defaults.
+Resets overloaded OID/PRN pairs to package defaults.
 
   $obj->reset;
 
@@ -228,7 +229,7 @@ __END__
 
 =head1 BUGS
 
-Please send to the gpsd email list.
+Please send issues to the gpsd-dev email list.
 
 =head1 LIMITS
 
