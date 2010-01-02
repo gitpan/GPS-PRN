@@ -1,8 +1,12 @@
 package GPS::PRN;
+use strict;
+use warnings;
+
+our $VERSION = '0.06';
 
 =head1 NAME
 
-GPS::PRN - Package for PRN - Object ID conversions.
+GPS::PRN - Package for GPS PRN - Object ID conversions.
 
 =head1 SYNOPSIS
 
@@ -29,12 +33,6 @@ GPS satellites are identified by the receiver by means of PRN-numbers. Real GPS 
 
 Function naming convention is "format of the return" underscore "format of the parameters."
 
-=cut
-
-use strict;
-use vars qw($VERSION);
-$VERSION = sprintf("%d.%02d", q{Revision: 0.05} =~ /(\d+)\.(\d+)/);
-
 =head1 CONSTRUCTOR
 
 =head2 new
@@ -56,11 +54,13 @@ sub new {
 
 =head1 METHODS
 
+=head2 initialize
+
 =cut
 
 sub initialize {
-  my $self = shift();
-  my $param = shift();
+  my $self=shift;
+  %$self=@_;
 }
 
 =head2 prn_oid 

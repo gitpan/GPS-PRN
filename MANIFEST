@@ -1,9 +1,9 @@
-bin/example.pl
-CHANGES
+scripts/GPS-PRN-example.pl
+Changes
 lib/GPS/PRN.pm
 LICENSE
 Makefile.PL
 MANIFEST
-META.yml
 README
 t/base.t
+META.yml                                 Module meta-data (added by MakeMaker)
